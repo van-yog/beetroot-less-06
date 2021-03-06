@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+/** @jsxImportSource @emotion/react */
+import {jsx} from '@emotion/react'
+
+import Counter from "./components/Counter"
+import Form from "./components/Form"
+import {NewButton, Button} from './components/styles/counter'
+import {WrapApp} from "./components/styles/app"
+import {yellow, green, gray} from "./components/styles/colors"
+import * as mq from "./components/styles/mq"
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <WrapApp>
+      <div css={{
+        backgroundColor: gray,
+        padding: "10px",
+        [mq.small]: {
+          backgroundColor: yellow
+        },
+        [mq.medium]: {
+          backgroundColor: green
+        }
+      }}
+
+        className="row" >
+        <Counter>
+          {({count, increment, decrement}) => (
+            <>
+              <h1>Counter: {count}</h1>
+              <Button marginRight="10px"  onClick={increment}>
+                Increment
+              </Button>
+              <Button marginRight="10px"  onClick={decrement}>Decrement</Button>
+            </>
+          )}
+        </Counter>
+
+        <div className="row">
+          <Form />
+        </div>
+     </div>
+   </WrapApp>
+  )
 }
 
-export default App;
+export default App
